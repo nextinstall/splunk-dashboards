@@ -149,7 +149,7 @@
       <title>DOMAINANAME - INBOUND - DC Connections - DNS=53, KRB=88, LDAP=389, LDAPS=636</title>
       <table>
         <search>
-          <query>( index=*INDEXNAME*) host=*HOST_NAME_SCHEME* sourcetype="WindowsFirewall" | eval fields= split(_raw, " ")|eval date=mvindex(fields,0) |eval time=mvindex(fields,1)|eval action=mvindex(fields,2)|eval protocol=mvindex(fields,3)|eval src_ip=mvindex(fields,4)|eval dst_ip=mvindex(fields,5)|eval src_port=mvindex(fields,6)|eval dst_port=mvindex(fields,7)|eval size=mvindex(fields,8)|eval tcpflags=mvindex(fields,9)|eval tcpsyn=mvindex(fields,10)|eval tcpack=mvindex(fields,11)|eval tcpwin=mvindex(fields,12)|eval icmptype=mvindex(fields,13)|eval icmpcode=mvindex(fields,14)|eval info=mvindex(fields,15)|eval path=mvindex(fields,16)|search path=RECEIVE AND (src_ip!=10.34.208.* AND src_ip!=127.0.0.1 AND src_ip!=10.34.8.*) AND (dst_port!=-) |stats count by host,dst_port,src_ip</query>
+          <query>( index=*INDEXNAME*) host=*HOST_NAME_SCHEME* sourcetype="WindowsFirewall" | eval fields= split(_raw, " ")|eval date=mvindex(fields,0) |eval time=mvindex(fields,1)|eval action=mvindex(fields,2)|eval protocol=mvindex(fields,3)|eval src_ip=mvindex(fields,4)|eval dst_ip=mvindex(fields,5)|eval src_port=mvindex(fields,6)|eval dst_port=mvindex(fields,7)|eval size=mvindex(fields,8)|eval tcpflags=mvindex(fields,9)|eval tcpsyn=mvindex(fields,10)|eval tcpack=mvindex(fields,11)|eval tcpwin=mvindex(fields,12)|eval icmptype=mvindex(fields,13)|eval icmpcode=mvindex(fields,14)|eval info=mvindex(fields,15)|eval path=mvindex(fields,16)|search path=RECEIVE AND (src_ip!=127.0.0.1) AND (dst_port!=-) |stats count by host,dst_port,src_ip</query>
           <earliest>-1d@d</earliest>
           <latest>@m</latest>
           <sampleRatio>1</sampleRatio>
@@ -221,7 +221,7 @@
   <row>
     <panel>
       <chart>
-        <title>Top 20 NTLMv1 Auths per Server</title>
+        <title>Top 10 NTLMv1 Auths per Server</title>
         <search>
           <query>( index=*INDEXNAME*) host=* Authentication_Package=NTLM Package_Name__NTLM_only_="NTLM V1"| timechart count by host limit=10</query>
           <earliest>-1d@d</earliest>
