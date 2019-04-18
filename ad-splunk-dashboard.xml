@@ -1,0 +1,283 @@
+<dashboard>
+  <label>ActiveDirectory Domain</label>
+  <row>
+    <panel>
+      <title>DOMAINANAME - 1 hour auth load by DC</title>
+      <chart>
+        <search>
+          <query>( index=*INDEXNAME*) (host=*HOST_NAME_SCHEME*) sourcetype="WinEventLog:Security" EventCode=4624 | stats count by host</query>
+          <earliest>-60m@m</earliest>
+          <latest>@m</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>60s</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">collapsed</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">bar</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">none</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>DOMAINANAME - Total Authentications / minute</title>
+      <chart>
+        <search>
+          <query>( index=*INDEXNAME*) (host=*HOST_NAME_SCHEME*) sourcetype="WinEventLog:Security" EventCode=4624  | timechart count</query>
+          <earliest>-60m@m</earliest>
+          <latest>@m</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>60s</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>DOMAINANAME - YESTERDAY - Kerberos Encryption</title>
+      <chart>
+        <title>0x17 = rc4-hmac | 0x12 = aes256</title>
+        <search>
+          <query>( index=*INDEXNAME*) Account_Domain=DOMAINNAME host=* EventCode=476* Keywords="Audit Success" Ticket_Encryption_Type="*"|top limit=20 Ticket_Encryption_Type |eval "KERBEROS Encryption Type"=case(Ticket_Encryption_Type="0x17","rc4-hmac",Ticket_Encryption_Type="0x12","aes256-cts-hmac-sha1-96")</query>
+          <earliest>-1d@d</earliest>
+          <latest>@d</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>120m</refresh>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.showPercent">1</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>DOMAINANAME - CURRENT 4 Hour - Kerberos Encryption Types</title>
+      <chart>
+        <title>0x17 = rc4-hmac | 0x12 = aes256</title>
+        <search>
+          <query>( index=*INDEXNAME*) Account_Domain=DOMAINNAME host=* EventCode=476* Keywords="Audit Success" Ticket_Encryption_Type="*"|top limit=20 Ticket_Encryption_Type |eval "KERBEROS Encryption Type"=case(Ticket_Encryption_Type="0x17","rc4-hmac",Ticket_Encryption_Type="0x12","aes256-cts-hmac-sha1-96")</query>
+          <earliest>-4h@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>15m</refresh>
+        </search>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.chart.showPercent">true</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.size">small</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>DOMAINANAME - INBOUND - DC Connections - DNS=53, KRB=88, LDAP=389, LDAPS=636</title>
+      <table>
+        <search>
+          <query>( index=*INDEXNAME*) host=*HOST_NAME_SCHEME* sourcetype="WindowsFirewall" | eval fields= split(_raw, " ")|eval date=mvindex(fields,0) |eval time=mvindex(fields,1)|eval action=mvindex(fields,2)|eval protocol=mvindex(fields,3)|eval src_ip=mvindex(fields,4)|eval dst_ip=mvindex(fields,5)|eval src_port=mvindex(fields,6)|eval dst_port=mvindex(fields,7)|eval size=mvindex(fields,8)|eval tcpflags=mvindex(fields,9)|eval tcpsyn=mvindex(fields,10)|eval tcpack=mvindex(fields,11)|eval tcpwin=mvindex(fields,12)|eval icmptype=mvindex(fields,13)|eval icmpcode=mvindex(fields,14)|eval info=mvindex(fields,15)|eval path=mvindex(fields,16)|search path=RECEIVE AND (src_ip!=10.34.208.* AND src_ip!=127.0.0.1 AND src_ip!=10.34.8.*) AND (dst_port!=-) |stats count by host,dst_port,src_ip</query>
+          <earliest>-1d@d</earliest>
+          <latest>@m</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">row</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>DOMAINANAME - NTLMv1 1hr Auth Volume</title>
+      <chart>
+        <search>
+          <query>( index=*INDEXNAME*) (host=*HOST_NAME_SCHEME*) Authentication_Package=NTLM Package_Name__NTLM_only_="NTLM V1" Account_Domain=DOMAINNAME | timechart count by host</query>
+          <earliest>-60m@m</earliest>
+          <latest>@m</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </chart>
+    </panel>
+   
+  </row>
+  <row>
+    <panel>
+      <title>DOMAINANAME - Top 20 NTLMv1 Authenticated Accounts</title>
+      <table>
+        <title>DOMAINANAME - Top 20 NTLMv1 Authenticated Accounts</title>
+        <search>
+          <query>( index=*INDEXNAME*) Account_Domain=DOMAINNAME Authentication_Package=NTLM Package_Name__NTLM_only_="NTLM V1" Account_Name!=*$ | top limit=20 Account_Name</query>
+          <earliest>-1d@d</earliest>
+          <latest>@d</latest>
+        </search>
+        <option name="drilldown">cell</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Top 20 NTLMv1 Auths per Server</title>
+        <search>
+          <query>( index=*INDEXNAME*) host=* Authentication_Package=NTLM Package_Name__NTLM_only_="NTLM V1"| timechart count by host limit=10</query>
+          <earliest>-1d@d</earliest>
+          <latest>@d</latest>
+        </search>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.chart">area</option>
+        <option name="charting.chart.nullValueMode">zero</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>BLOCKS - IF Restrict NTLM</title>
+      <table>
+        <search>
+          <query>( index=*INDEXNAME*) EventCode=8004 | stats count by User_name,Workstation_name,host</query>
+          <earliest>-1d@d</earliest>
+          <latest>@d</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>LAPS Access - DOMAINNAME</title>
+        <search>
+          <query>( index=*INDEXNAME*) (EventCode=4662 OR EventCode=4624)  [|search ( index=*INDEXNAME*) (EventCode=4662 Account_Name!="*$" "ms-Mcs-AdmPwd"  NOT (Account_Name=exemptServiceAccount)) | table Logon_ID | dedup Logon_ID] | table _time,EventCode,Account_Name,Logon_ID,Object_Name,Source_Network_Address,Workstation_Name | eval Logon_ID=if(mvcount(Logon_ID)&gt;1,mvindex(Logon_ID,1),Logon_ID) | eventstats dc(Object_Name) AS Number_Accounts_Retrieved values(Object_Name) AS Accounts_Retrieved BY Logon_ID | where(EventCode=4624) | where(Number_Accounts_Retrieved&gt;0)| sort -_time</query>
+          <earliest>@mon</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="count">1</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>
