@@ -18,18 +18,26 @@ host=*HOST_NAME_SCHEMA*
 *DOMAINANME*
 
 IE:
+
 If my index is AD-Systems-Index:
-    index=AD-Systems-Index
+
+    `index=AD-Systems-Index`
+
 If my DC's have names like AD-DC01, AD-DC02, AD-DC03...:
-host=AD-DC0*
+
+`host=AD-DC0*`
 
 If my NETBIOS domain name is CORP and my FQDN is: CORP.CONGLOMO.ORG:
-replace DOMAINNAME with CORP
 
-Some event analysis (* EventCode=476*) might be required to ensure events are properly filtered such that: 
-Account_Domain=CORP
+replace `DOMAINNAME` with `CORP`
+
+Some event analysis `EventCode=476*` might be required to ensure events are properly filtered such that: 
+
+`Account_Domain=CORP` 
+
 OR
-Account_Domain=CORP.CONGLOMO.ORG
+
+`Account_Domain=CORP.CONGLOMO.ORG`
 
 
 ### Prerequisites
