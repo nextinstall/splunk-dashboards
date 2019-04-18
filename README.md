@@ -10,9 +10,12 @@ This repo contians a baseline dashboard that once updated for your envionrment s
 
 ## Getting Started
 Download the ad-splunk-dashboard.xml file and edit/replace the following variables to reflect your enviornment:
+
 index=*INDEXNAME*
-host=*HOST_NAME_SCHEME*
-DOMAINANME
+
+host=*HOST_NAME_SCHEMA*
+
+*DOMAINANME*
 
 IE:
 If my index is AD-Systems-Index:
