@@ -6,6 +6,8 @@ This repo contians a baseline dashboard that once updated for your envionrment s
 * NTLM usage/data
 * Firewall Info
 
+![Sample AD Dashboard](https://github.com/nextinstall/splunk-dashboards/blob/master/ADSampleDashboard.png)
+
 ## Getting Started
 Copy the ad-splunk-dashboard.xml file and edit the search/replace the following variables to reflect your enviornment.
 
