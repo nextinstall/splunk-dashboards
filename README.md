@@ -49,7 +49,8 @@ The Firewall panel expects you to be be tagging your firewall logs with sourcety
 
 ## Deployment
 Copy and augment the .xml file to suit your enviornment. Create a new Splunk dashboard and edit source.
-Pate the contents of the .xml in their entierity. 
+Paste the raw contents of the .xml in their entierity into the source (clear out any existing stuffs). 
+Save the source/panels. Profit.
 
 
 ## Specific Search Queries Used
