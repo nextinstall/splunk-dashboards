@@ -21,7 +21,7 @@ IE:
 
 If my index is AD-Systems-Index:
 
-    `index=AD-Systems-Index`
+`index=AD-Systems-Index`
 
 If my DC's have names like AD-DC01, AD-DC02, AD-DC03...:
 
